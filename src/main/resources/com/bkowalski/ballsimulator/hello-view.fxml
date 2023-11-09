@@ -1,16 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.bkowalski.ballsimulator.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<GridPane gridLinesVisible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600" minWidth="600" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: gray" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bkowalski.ballsimulator.HelloController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="75.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints vgrow="ALWAYS" />
+    </rowConstraints>
+    <children>
+        <Pane fx:id="canvasPane" style="-fx-border-width: 10 5 10 10; -fx-border-color: #9D9D9D;">
+            <Canvas fx:id="canvas" layoutX="10.0" layoutY="10.0" />
+        </Pane>
+        <VBox spacing="5.0" style="-fx-border-width: 10 10 10 5; -fx-border-color: #9D9D9D;" GridPane.columnIndex="1">
+            <Label text=" X" />
+            <Slider fx:id="xSlider"
+                    showTickMarks="true"
+                    showTickLabels="true"
+                    majorTickUnit="50"
+                    minorTickCount="50"/>
+            <Label text=" Y" />
+            <Slider fx:id="ySlider"
+                    showTickMarks="true"
+                    showTickLabels="true"
+                    majorTickUnit="50"
+                    minorTickCount="50"/>
+            <Label text=" X speed" />
+            <Slider fx:id="xSpeedSlider"
+                    min="-20"
+                    max="20"
+                    showTickMarks="true"
+                    showTickLabels="true"
+                    majorTickUnit="10"/>
+            <Label text=" Y speed" />
+            <Slider fx:id="ySpeedSlider"
+                    min="-20"
+                    max="20"
+                    showTickMarks="true"
+                    showTickLabels="true"
+                    majorTickUnit="5"/>
+            <Label text=" Air resistance&#10; coefficient" />
+            <Slider fx:id="airResistanceCoefficientSlider"
+                    min="0"
+                    max="10"
+                    showTickMarks="true"
+                    showTickLabels="true"
+                    majorTickUnit="1"/>
+            <Button fx:id="startButton" alignment="CENTER" prefWidth="Infinity" text="START">
+                <VBox.margin>
+                    <Insets top="10" right="10" bottom="5" left="10"/>
+                </VBox.margin>
+            </Button>
+            <Button fx:id="stopButton" prefWidth="Infinity" text="STOP">
+                <VBox.margin>
+                    <Insets top="5" right="10" bottom="10" left="10"/>
+                </VBox.margin>
+            </Button>
+        </VBox>
+    </children>
+</GridPane>
