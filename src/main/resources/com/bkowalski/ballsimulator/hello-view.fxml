@@ -19,48 +19,21 @@
         </Pane>
         <VBox spacing="5.0" style="-fx-border-width: 10 10 10 5; -fx-border-color: #9D9D9D;" GridPane.columnIndex="1">
             <Label text=" X" />
-            <Slider fx:id="xSlider"
-                    showTickMarks="true"
-                    showTickLabels="true"
-                    majorTickUnit="50"
-                    minorTickCount="50"/>
+            <Slider majorTickUnit="50" minorTickCount="50" showTickLabels="true" showTickMarks="true" fx:id="xSlider" />
             <Label text=" Y" />
-            <Slider fx:id="ySlider"
-                    showTickMarks="true"
-                    showTickLabels="true"
-                    majorTickUnit="50"
-                    minorTickCount="50"/>
+            <Slider fx:id="ySlider" majorTickUnit="50" minorTickCount="50" showTickLabels="true" showTickMarks="true" />
             <Label text=" X speed" />
-            <Slider fx:id="xSpeedSlider"
-                    min="-20"
-                    max="20"
-                    showTickMarks="true"
-                    showTickLabels="true"
-                    majorTickUnit="10"/>
+            <Slider majorTickUnit="10" max="20" min="-20" showTickLabels="true" showTickMarks="true" fx:id="xSpeedSlider" />
             <Label text=" Y speed" />
-            <Slider fx:id="ySpeedSlider"
-                    min="-20"
-                    max="20"
-                    showTickMarks="true"
-                    showTickLabels="true"
-                    majorTickUnit="5"/>
+            <Slider fx:id="ySpeedSlider" majorTickUnit="5" max="20" min="-20" showTickLabels="true" showTickMarks="true" />
             <Label text=" Air resistance&#10; coefficient" />
-            <Slider fx:id="airResistanceCoefficientSlider"
-                    min="0"
-                    max="10"
-                    showTickMarks="true"
-                    showTickLabels="true"
-                    majorTickUnit="1"/>
-            <Button fx:id="startButton" alignment="CENTER" prefWidth="Infinity" text="START">
-                <VBox.margin>
-                    <Insets top="10" right="10" bottom="5" left="10"/>
-                </VBox.margin>
-            </Button>
-            <Button fx:id="stopButton" prefWidth="Infinity" text="STOP">
-                <VBox.margin>
-                    <Insets top="5" right="10" bottom="10" left="10"/>
-                </VBox.margin>
-            </Button>
+            <Slider fx:id="airResistanceCoefficientSlider" majorTickUnit="1" max="10" min="0" showTickLabels="true" showTickMarks="true" />
+            <RadioButton fx:id="showSpeedArrowRadio" text="Show speed arrow" onAction="#setShowSpeedArrow" selected="true"/>
+            <Button fx:id="startButton" alignment="CENTER" prefWidth="Infinity" text="START" />
+            <Button fx:id="stopButton" prefWidth="Infinity" text="STOP" />
+         <padding>
+            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+         </padding>
         </VBox>
     </children>
 </GridPane>
