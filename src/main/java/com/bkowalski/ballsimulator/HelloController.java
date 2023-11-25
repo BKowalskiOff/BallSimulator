@@ -115,7 +115,7 @@ public class HelloController {
         GraphicsContext gc = this.canvas.getGraphicsContext2D();
         gc.setFill(Color.BLACK);
         double r = this.ball.getR();
-        gc.fillOval(this.ball.getX() - r, this.ball.getY() - r, 2*r, 2*r);
+        gc.fillOval(this.ball.getX() - r, this.canvas.getHeight() - (this.ball.getY() + r), 2*r, 2*r);
     }
 
     private void drawSpeedArrow(){
@@ -124,7 +124,7 @@ public class HelloController {
         gc.setLineWidth(3);
         int lMult = 3; // we multiply the length so that the arrow isn't too small
         double x1 = this.ball.getX();
-        double y1 = this.ball.getY();
+        double y1 = this.canvas.getHeight() - this.ball.getY();
         double vx = this.ball.getVx();
         double vy = -this.ball.getVy(); // we negate this value due to y-axis downwards direction
         double x2 = x1 + lMult*vx;
