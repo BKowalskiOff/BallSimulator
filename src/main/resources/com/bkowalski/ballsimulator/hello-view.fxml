@@ -31,6 +31,7 @@
             <RadioButton fx:id="showSpeedArrowRadio" text="Show speed arrow" onAction="#setShowSpeedArrow" selected="true"/>
             <Button fx:id="startButton" alignment="CENTER" prefWidth="Infinity" text="START" onAction="#onStartButtonClicked"/>
             <Button fx:id="stopButton" prefWidth="Infinity" text="STOP" onAction="#onStopButtonClicked"/>
+            <Button fx:id="resetButton" prefWidth="Infinity" text="RESET" onAction="#onResetButtonClicked"/>
             <padding>
                 <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
             </padding>

@@ -123,6 +123,19 @@ public class HelloController {
         this.simulationTimeline.setCycleCount(Timeline.INDEFINITE);
 
     }
+    @FXML
+    private void onResetButtonClicked(){
+        this.xSlider.setValue(this.canvas.getWidth()/2);
+        this.ySlider.setValue(this.canvas.getHeight()/2);
+        //this.ball.setX(this.canvas.getWidth()/2);
+        //this.ball.setY(this.canvas.getHeight()/2);
+        this.xSpeedSlider.setValue(0);
+        this.ySpeedSlider.setValue(0);
+        //this.ball.setVx(0);
+        //this.ball.setVy(0);
+        this.airResistanceCoefficientSlider.setValue(0);
+
+    }
     // we're using a 2D graphics context of the canvas to clear it's content with white color (for now)
     private void clearCanvas(){
         GraphicsContext gc = this.canvas.getGraphicsContext2D();
@@ -139,16 +152,17 @@ public class HelloController {
     }
 
     private void drawSpeedArrow(){
-        GraphicsContext gc = this.canvas.getGraphicsContext2D();
-        gc.setStroke(this.arrowColor);
-        gc.setLineWidth(3);
+        double vx = this.ball.getVx();
+        double vy = -this.ball.getVy(); // we negate this value due to y-axis downwards direction
+        if (vx == 0.0 && vy == 0.0) return; // if the speed in both directions equals 0, there's no arrow to be drawn
         double lMult = 0.5; // we multiply the length so that the arrow isn't too small or too large
         double x1 = this.ball.getX();
         double y1 = this.canvas.getHeight() - this.ball.getY();
-        double vx = this.ball.getVx();
-        double vy = -this.ball.getVy(); // we negate this value due to y-axis downwards direction
         double x2 = x1 + lMult*vx;
         double y2 = y1 + lMult*vy;
+        GraphicsContext gc = this.canvas.getGraphicsContext2D();
+        gc.setStroke(this.arrowColor);
+        gc.setLineWidth(3);
         // the speed vector can be represented as: vx = l * cos(a), vy = l * sin(a), where a is its angle with respect
         // to x-axis and can be calculated using the following formula: vy/vx = tan(a) -> a = atan(vy, vx)
         // the "head lines" are just this vector rotated by 135 and 225 degrees
