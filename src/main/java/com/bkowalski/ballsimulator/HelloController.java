@@ -1,5 +1,9 @@
 package com.bkowalski.ballsimulator;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -7,6 +11,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 public class HelloController {
 
@@ -27,8 +32,13 @@ public class HelloController {
     @FXML
     private RadioButton showSpeedArrowRadio;
     private Ball ball;
+    // the simulation area is big - if every pixel represents one meter, we are looking at a 600m by 600m area,
+    // which makes a realistically modelled gravity barely visible, so I have decided to scale this value
+    private final float gravity = 100;
     private boolean showSpeedArrow = true;
     private final Color arrowColor = Color.GREEN;
+    private Timeline simulationTimeline;
+    private final double FRAME_RATE = 150.0;
 
     // initialization of the controller - what is needed to be done at the very start of the app
     @FXML
@@ -37,7 +47,7 @@ public class HelloController {
         // initializing the ball object
         // initially the ball should be in the middle of the canvas
         int ballRadius = 15;
-        double bouncinessCoefficient = 1.0;
+        double bouncinessCoefficient = 0.7;
 
         this.ball = new Ball(this.canvas.getWidth()/2 - ballRadius,this.canvas.getHeight()/2 - ballRadius,
                 0,0, ballRadius, bouncinessCoefficient);
@@ -102,6 +112,16 @@ public class HelloController {
             this.drawBall();
             this.drawSpeedArrow();
         });
+
+        this.simulationTimeline = new Timeline(new KeyFrame(Duration.millis(1000/this.FRAME_RATE), (event) -> {
+            this.ball.update(1.0/this.FRAME_RATE, this.canvas.getWidth(), this.canvas.getHeight(),
+                    this.airResistanceCoefficientSlider.getValue()/1000.0, this.gravity);
+            this.clearCanvas();
+            this.drawBall();
+            this.drawSpeedArrow();
+        }));
+        this.simulationTimeline.setCycleCount(Timeline.INDEFINITE);
+
     }
     // we're using a 2D graphics context of the canvas to clear it's content with white color (for now)
     private void clearCanvas(){
@@ -122,7 +142,7 @@ public class HelloController {
         GraphicsContext gc = this.canvas.getGraphicsContext2D();
         gc.setStroke(this.arrowColor);
         gc.setLineWidth(3);
-        int lMult = 3; // we multiply the length so that the arrow isn't too small
+        double lMult = 0.5; // we multiply the length so that the arrow isn't too small or too large
         double x1 = this.ball.getX();
         double y1 = this.canvas.getHeight() - this.ball.getY();
         double vx = this.ball.getVx();
@@ -155,6 +175,19 @@ public class HelloController {
         this.drawBall();
         if(this.showSpeedArrow){
             this.drawSpeedArrow();
+        }
+    }
+
+    @FXML
+    public void onStartButtonClicked() {
+        if(this.simulationTimeline.getStatus() != Animation.Status.RUNNING) {
+            this.simulationTimeline.play();
+        }
+    }
+    @FXML
+    public void onStopButtonClicked() {
+        if(this.simulationTimeline.getStatus() == Animation.Status.RUNNING) {
+            this.simulationTimeline.pause();
         }
     }
 }

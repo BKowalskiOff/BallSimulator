@@ -23,14 +23,14 @@
             <Label text=" Y" />
             <Slider fx:id="ySlider" majorTickUnit="50" minorTickCount="50" showTickLabels="true" showTickMarks="true" />
             <Label text=" X speed" />
-            <Slider majorTickUnit="10" max="20" min="-20" showTickLabels="true" showTickMarks="true" fx:id="xSpeedSlider" />
+            <Slider fx:id="xSpeedSlider" majorTickUnit="50" max="200" min="-200" showTickLabels="true" showTickMarks="true" />
             <Label text=" Y speed" />
-            <Slider fx:id="ySpeedSlider" majorTickUnit="5" max="20" min="-20" showTickLabels="true" showTickMarks="true" />
+            <Slider fx:id="ySpeedSlider" majorTickUnit="50" max="200" min="-200" showTickLabels="true" showTickMarks="true" />
             <Label text=" Air resistance&#10; coefficient" />
             <Slider fx:id="airResistanceCoefficientSlider" majorTickUnit="1" max="10" min="0" showTickLabels="true" showTickMarks="true" />
             <RadioButton fx:id="showSpeedArrowRadio" text="Show speed arrow" onAction="#setShowSpeedArrow" selected="true"/>
-            <Button fx:id="startButton" alignment="CENTER" prefWidth="Infinity" text="START" />
-            <Button fx:id="stopButton" prefWidth="Infinity" text="STOP" />
+            <Button fx:id="startButton" alignment="CENTER" prefWidth="Infinity" text="START" onAction="#onStartButtonClicked"/>
+            <Button fx:id="stopButton" prefWidth="Infinity" text="STOP" onAction="#onStopButtonClicked"/>
             <padding>
                 <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
             </padding>
